@@ -6,7 +6,7 @@ const config: ConnectionOptions = {
     port: 3306,
     database: 'clipinvoice',
     username: 'root',
-    password: 'root',
+    password: '1234',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: false,
     migrations: [__dirname + '/migrations/*{.ts,.js}'],
