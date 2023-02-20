@@ -20,7 +20,7 @@ export class UsersService {
   async register(createUserDto: CreateUserDto): Promise<User> {
     try {
       const userByEmail = await this.usersRepository.findOne({ email: createUserDto.email });
-      if (userByEmail) { 
+      if (userByEmail) {
         throw new HttpException('User with this email already exists', HttpStatus.UNPROCESSABLE_ENTITY);
       }
       const newUser = new User();
@@ -31,19 +31,19 @@ export class UsersService {
     }
   }
 
-  async findById(id: number): Promise<User> { 
+  async findById(id: number): Promise<User> {
     return this.usersRepository.findOne(id);
   }
 
-  async login(loginUserDto: LoginUserDto): Promise<User> { 
+  async login(loginUserDto: LoginUserDto): Promise<User> {
     try {
       const user = await this.usersRepository.findOne({ email: loginUserDto.email }, { select: ['id', 'name', 'email', 'password'] });
-      if (!user) { 
+      if (!user) {
         throw new HttpException('User with this email does not exist', HttpStatus.UNPROCESSABLE_ENTITY);
       }
 
       const isPasswordValid = await compare(loginUserDto.password, user.password);
-      
+
       if (!isPasswordValid) {
         throw new HttpException('Password is not valid', HttpStatus.UNPROCESSABLE_ENTITY);
       }
