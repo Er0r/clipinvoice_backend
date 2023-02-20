@@ -8,6 +8,8 @@ import { JWT_SECRET } from 'src/config';
 import { UserResponseInterface } from './types/userResponse.interface';
 import { HttpException } from '@nestjs/common/exceptions';
 import { HttpStatus } from '@nestjs/common/enums';
+import { compare } from 'bcrypt';
+import { LoginUserDto } from './DTO/login-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -24,6 +26,30 @@ export class UsersService {
       const newUser = new User();
       Object.assign(newUser, createUserDto);
       return await this.usersRepository.save(newUser);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findById(id: number): Promise<User> { 
+    return this.usersRepository.findOne(id);
+  }
+
+  async login(loginUserDto: LoginUserDto): Promise<User> { 
+    try {
+      const user = await this.usersRepository.findOne({ email: loginUserDto.email }, { select: ['id', 'name', 'email', 'password'] });
+      if (!user) { 
+        throw new HttpException('User with this email does not exist', HttpStatus.UNPROCESSABLE_ENTITY);
+      }
+
+      const isPasswordValid = await compare(loginUserDto.password, user.password);
+      
+      if (!isPasswordValid) {
+        throw new HttpException('Password is not valid', HttpStatus.UNPROCESSABLE_ENTITY);
+      }
+
+      delete user.password;
+      return user;
     } catch (error) {
       throw error;
     }
