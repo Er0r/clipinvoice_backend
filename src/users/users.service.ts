@@ -10,6 +10,7 @@ import { HttpException } from '@nestjs/common/exceptions';
 import { HttpStatus } from '@nestjs/common/enums';
 import { compare } from 'bcrypt';
 import { LoginUserDto } from './DTO/login-user.dto';
+import { UpdateUserDto } from './DTO/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -50,6 +51,15 @@ export class UsersService {
 
       delete user.password;
       return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateCurrentUser(user: User, updateUserDto: UpdateUserDto): Promise<User> { 
+    try {
+      Object.assign(user, updateUserDto);
+      return await this.usersRepository.save(user);
     } catch (error) {
       throw error;
     }
