@@ -3,10 +3,12 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  OneToMany,
 } from 'typeorm';
 
 import { hash } from 'bcrypt';
 import { BeforeInsert } from 'typeorm';
+import { ProductEntity } from 'src/products/products.entity';
 
 @Entity({ name: 'user' })
 export class User {
@@ -38,5 +40,8 @@ export class User {
   async hashPassword() {
     this.password = await hash(this.password, 10);
   }
+
+  @OneToMany(() => ProductEntity, (product) => product.user)
+  products: ProductEntity[];
 
 }

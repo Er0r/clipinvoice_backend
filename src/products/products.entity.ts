@@ -1,4 +1,5 @@
-import { BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeUpdate, Column, Entity, CreateDateColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/users/user.entity';
 
 @Entity('products')
 export class ProductEntity {
@@ -14,14 +15,17 @@ export class ProductEntity {
     @Column()
     quantity: number;
 
-    @Column()
-    createdAt: Date;
+    @CreateDateColumn()
+    created_at: Date;
 
-    @Column()
-    updatedAt: Date;
+    @CreateDateColumn()
+    updated_at: Date;
 
     @BeforeUpdate() 
     updateTimestamp() { 
-        this.updatedAt = new Date();
+        this.updated_at = new Date();
     }
+
+    @ManyToOne(() => User, user => user.products)
+    user: User;
 }
