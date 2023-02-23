@@ -14,4 +14,8 @@ export class ProductsService {
         product.user = currentUser;
         return await this.productRepository.save(product);
     }
+
+    async getAllProducts(currentUser: User): Promise<ProductEntity[]> { 
+        return await this.productRepository.find({ where: { user: currentUser } });
+    }
 }
