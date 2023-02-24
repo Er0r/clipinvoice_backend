@@ -5,6 +5,8 @@ import { CreateProductDto } from './DTO/create-product.dto';
 import { UserDecorator } from '../users/decorators/user.decorator';
 import { User } from 'src/users/user.entity';
 import { ProductEntity } from './products.entity';
+import { Roles } from 'src/users/roles/roles.decorator';
+import { RoleGuard } from 'src/users/role/role.guard';
 
 
 @Controller('products')
@@ -18,7 +20,8 @@ export class ProductsController {
     }
 
     @Get()
-    @UseGuards(AuthGuard)
+    @Roles('super-admin')
+    @UseGuards(AuthGuard, RoleGuard)
     async getAll(@UserDecorator() currentUser: User): Promise<ProductEntity[]> { 
         return await this.productsService.getAllProducts(currentUser);
     }
