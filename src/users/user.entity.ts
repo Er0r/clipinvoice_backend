@@ -9,6 +9,7 @@ import {
 import { hash } from 'bcrypt';
 import { BeforeInsert } from 'typeorm';
 import { ProductEntity } from 'src/products/products.entity';
+import { InvoiceEntity } from 'src/invoice/invoice.entity';
 
 @Entity({ name: 'user' })
 export class User {
@@ -44,4 +45,6 @@ export class User {
   @OneToMany(() => ProductEntity, (product) => product.user)
   products: ProductEntity[];
 
+  @OneToMany(() => InvoiceEntity, (invoice) => invoice.user)
+  invoices: InvoiceEntity[];
 }
