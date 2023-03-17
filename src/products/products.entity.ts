@@ -30,6 +30,4 @@ export class ProductEntity {
     @ManyToOne(() => User, user => user.products)
     user: User;
 
-    @ManyToOne(() => InvoiceEntity, invoice => invoice.product)
-    invoices: InvoiceEntity;
 }

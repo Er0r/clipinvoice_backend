@@ -19,4 +19,12 @@ export class InvoiceController {
     async create(@UserDecorator() currentUser: User,  @Body('invoice') createInvoiceDto: CreateInvoiceDto): Promise<InvoiceEntity> { 
         return await this.invoiceService.createInvoice(currentUser, createInvoiceDto);
     }
+
+    @Get()
+    @UseGuards(AuthGuard)
+    @Roles(RolesType.ADMIN, RolesType.SUPER_ADMIN)
+    async getAllInvoices(@UserDecorator() currentUser: User): Promise<InvoiceEntity[]> {
+        return await this.invoiceService.getInvoices(currentUser);
+    }
+
 }

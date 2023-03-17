@@ -1,6 +1,5 @@
 import {PrimaryGeneratedColumn, Entity, Column, ManyToOne, OneToMany, CreateDateColumn, BeforeUpdate} from 'typeorm';
 import { User } from 'src/users/user.entity';
-import { ProductEntity } from 'src/products/products.entity';
 
 @Entity('invoices')
 export class InvoiceEntity { 
@@ -24,9 +23,14 @@ export class InvoiceEntity {
         this.updated_at = new Date();
     }
 
+    @Column({ type: 'text', transformer: {
+        to: (value: any) => JSON.stringify(value),
+        from: (value: any) => JSON.parse(value)
+    }})
+    products: any[];
+
     @ManyToOne(() => User, user => user.invoices)
     user: User;
 
-    @OneToMany(() => ProductEntity, product => product.invoices)
-    product: ProductEntity;
+    
 }

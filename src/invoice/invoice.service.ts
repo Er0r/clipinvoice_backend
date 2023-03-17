@@ -20,4 +20,12 @@ export class InvoiceService {
             console.log(err);
         }
     }
+
+    async getInvoices(currentUser: User): Promise<InvoiceEntity[]> { 
+        try{
+            return await this.invoiceRepository.find({ user: currentUser });
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }

@@ -1,5 +1,4 @@
 import { IsNotEmpty } from "class-validator";
-import { ProductEntity } from "src/products/products.entity";
 
 export class CreateInvoiceDto {
     @IsNotEmpty()
@@ -9,5 +8,5 @@ export class CreateInvoiceDto {
     slug: string;
 
     @IsNotEmpty()
-    readonly product: ProductEntity[];
+    readonly products: [];
 }
