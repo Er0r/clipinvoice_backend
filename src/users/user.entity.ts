@@ -11,7 +11,7 @@ import { BeforeInsert } from 'typeorm';
 import { ProductEntity } from 'src/products/products.entity';
 import { InvoiceEntity } from 'src/invoice/invoice.entity';
 
-@Entity({ name: 'user' })
+@Entity('user')
 export class User {
   @PrimaryGeneratedColumn()
   id: number;

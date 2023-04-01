@@ -1,14 +1,14 @@
 import { ConnectionOptions } from 'typeorm';
 
 const config: ConnectionOptions = { 
-    type: 'mysql',
-    host: 'localhost',
-    port: 3306,
-    database: 'clipinvoice',
-    username: 'root',
-    password: 'root',
+    type: 'postgres',
+    host: process.env.POSTGRES_HOST || 'localhost',
+    port:  parseInt(process.env.POSTGRES_PORT) || 5432,
+    database:  process.env.DB_NAME || 'clipinvoice',
+    username:  process.env.DB_USERNAME || 'postgres',
+    password:  process.env.DB_PASSWORD || 'fahim',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
-    synchronize: false,
+    synchronize: true,
     migrations: [__dirname + '/migrations/*{.ts,.js}'],
     cli: {
         migrationsDir: 'src/migrations',

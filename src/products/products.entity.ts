@@ -1,6 +1,5 @@
 import { BeforeUpdate, Column, Entity, CreateDateColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from 'src/users/user.entity';
-import { InvoiceEntity } from 'src/invoice/invoice.entity';
 
 @Entity('products')
 export class ProductEntity {
