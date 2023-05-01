@@ -26,5 +26,4 @@ export class InvoiceController {
     async getAllInvoices(@UserDecorator() currentUser: User): Promise<InvoiceEntity[]> {
         return await this.invoiceService.getInvoices(currentUser);
     }
-
 }
