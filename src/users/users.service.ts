@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto } from './DTO/create-user.dto';
 import { User } from './user.entity';
 import { sign } from 'jsonwebtoken';
 import { JWT_SECRET } from 'src/config';
