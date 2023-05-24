@@ -23,7 +23,7 @@ export class ProductsController {
     }
 
     @Get()
-    @Roles(RolesType.EMPLOYEE, RolesType.ADMIN, RolesType.SUPER_ADMIN)
+    @Roles(RolesType.CLIENT, RolesType.ADMIN, RolesType.SUPER_ADMIN)
     @UseGuards(AuthGuard, RoleGuard)
     async getAll(@UserDecorator() currentUser: User): Promise<ProductEntity[]> { 
         return await this.productsService.getAllProducts(currentUser);

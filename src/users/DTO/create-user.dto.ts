@@ -16,4 +16,6 @@ export class CreateUserDto {
 
     @IsNotEmpty()
     status: string;
+
+    company?: string;    
 }

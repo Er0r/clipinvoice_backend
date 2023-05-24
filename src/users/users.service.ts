@@ -18,7 +18,7 @@ export class UsersService {
     @InjectRepository(User) private readonly usersRepository: Repository<User>,
   ) { }
 
-  async register(createUserDto: CreateUserDto): Promise<User> {
+  async registerAdmin (createUserDto: CreateUserDto): Promise<User> { 
     try {
       const userByEmail = await this.usersRepository.findOne({ email: createUserDto.email });
       if (userByEmail) {
@@ -26,6 +26,22 @@ export class UsersService {
       }
       const newUser = new User();
       Object.assign(newUser, createUserDto);
+      newUser.role = 'super_admin';
+      return await this.usersRepository.save(newUser);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async register(currentUser:User, createUserDto: CreateUserDto): Promise<User> {
+    try {
+      const userByEmail = await this.usersRepository.findOne({ email: createUserDto.email });
+      if (userByEmail) {
+        throw new HttpException('User with this email already exists', HttpStatus.UNPROCESSABLE_ENTITY);
+      }
+      const newUser = new User();
+      Object.assign(newUser, createUserDto);
+      newUser.company = currentUser.role === 'super_admin' ? createUserDto.company : currentUser.company;
       return await this.usersRepository.save(newUser);
     } catch (error) {
       throw error;

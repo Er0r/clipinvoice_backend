@@ -7,15 +7,26 @@ import { UserDecorator } from './decorators/user.decorator';
 import { User } from './user.entity';
 import { AuthGuard } from './guards/auth.guard';
 import { UpdateUserDto } from './DTO/update-user.dto';
+import { Roles } from 'src/users/roles/roles.decorator';
+import { RoleGuard } from 'src/users/role/role.guard';
+import { RolesType } from 'src/users/role/role.enum';
 
 @Controller()
 export class UsersController {
     constructor( private usersService: UsersService) { }
 
+    @Post('users/admin/register') 
+    async registerAdmin(@Body() createUserDto: CreateUserDto): Promise<UserResponseInterface> { 
+        const user = await this.usersService.registerAdmin(createUserDto);
+        return await this.usersService.buildUserResponse(user);
+    }
+
     @Post('users/register') 
+    @UseGuards(AuthGuard, RoleGuard)
+    @Roles(RolesType.ADMIN, RolesType.SUPER_ADMIN)
     @UsePipes(new ValidationPipe())
-    async register(@Body() createUserDto: CreateUserDto): Promise<UserResponseInterface> { 
-        const user = await this.usersService.register(createUserDto);
+    async register(@UserDecorator() currentUser: User, @Body() createUserDto: CreateUserDto): Promise<UserResponseInterface> { 
+        const user = await this.usersService.register(currentUser, createUserDto);
         return await this.usersService.buildUserResponse(user);
     }
 

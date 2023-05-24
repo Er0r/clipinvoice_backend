@@ -31,6 +31,9 @@ export class User {
   @Column()
   status: string;
 
+  @Column()
+  company: string;
+
   @CreateDateColumn()
   created_at: Date;
 
