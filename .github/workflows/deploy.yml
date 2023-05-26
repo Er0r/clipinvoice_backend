@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Copy repository contents via scp
-      uses: clipinvoice/invoice@v0.0.1
+      uses: git@github.com:Er0r/clipinvoice_backend.git
       env:
         HOST: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
@@ -22,7 +22,7 @@ jobs:
         target: "/var/www/clipinvoice_backend"
 
     - name: Executing remote command
-      uses: clipinvoice/invoice@v0.0.1
+      uses: git@github.com:Er0r/clipinvoice_backend.git
       with:
         host: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
