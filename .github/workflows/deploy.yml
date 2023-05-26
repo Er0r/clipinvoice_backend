@@ -13,10 +13,58 @@ jobs:
     - name: Copy repository contents via scp
       uses: Er0r/clipinvoice_backend
       env:
-        HOST: ${{ secrets.HOST }}
-        USERNAME: ${{ secrets.USERNAME }}
-        PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.SSHKEY }}
+        HOST: 188.166.242.144
+        USERNAME: root
+        PORT: 22
+        KEY: -----BEGIN OPENSSH PRIVATE KEY-----
+          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
+          -----END OPENSSH PRIVATE KEY-----
       with:
         source: "."
         target: "/var/www/clipinvoice_backend"
@@ -24,8 +72,56 @@ jobs:
     - name: Executing remote command
       uses: Er0r/clipinvoice_backend
       with:
-        host: ${{ secrets.HOST }}
-        USERNAME: ${{ secrets.USERNAME }}
-        PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.SSHKEY }}
+        host: 188.166.242.144
+        USERNAME: root
+        PORT: 22
+        KEY: -----BEGIN OPENSSH PRIVATE KEY-----
+          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
+          -----END OPENSSH PRIVATE KEY-----
         script: ls
