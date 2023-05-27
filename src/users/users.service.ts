@@ -33,7 +33,7 @@ export class UsersService {
     }
   }
 
-  async register(currentUser:User, createUserDto: CreateUserDto): Promise<User> {
+  async register(createUserDto: CreateUserDto): Promise<User> {
     try {
       const userByEmail = await this.usersRepository.findOne({ email: createUserDto.email });
       if (userByEmail) {

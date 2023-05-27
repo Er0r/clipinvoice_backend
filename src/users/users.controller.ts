@@ -23,8 +23,8 @@ export class UsersController {
 
     @Post('users/register') 
     @UsePipes(new ValidationPipe())
-    async register(@UserDecorator() currentUser: User, @Body() createUserDto: CreateUserDto): Promise<UserResponseInterface> { 
-        const user = await this.usersService.register(currentUser, createUserDto);
+    async register(@Body() createUserDto: CreateUserDto): Promise<UserResponseInterface> { 
+        const user = await this.usersService.register(createUserDto);
         return await this.usersService.buildUserResponse(user);
     }
 
