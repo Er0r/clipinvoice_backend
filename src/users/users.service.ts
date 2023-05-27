@@ -41,7 +41,6 @@ export class UsersService {
       }
       const newUser = new User();
       Object.assign(newUser, createUserDto);
-      newUser.company = currentUser.role === 'super_admin' ? createUserDto.company : currentUser.company;
       return await this.usersRepository.save(newUser);
     } catch (error) {
       throw error;

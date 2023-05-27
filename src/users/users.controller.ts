@@ -22,8 +22,6 @@ export class UsersController {
     }
 
     @Post('users/register') 
-    @UseGuards(AuthGuard, RoleGuard)
-    @Roles(RolesType.ADMIN, RolesType.SUPER_ADMIN)
     @UsePipes(new ValidationPipe())
     async register(@UserDecorator() currentUser: User, @Body() createUserDto: CreateUserDto): Promise<UserResponseInterface> { 
         const user = await this.usersService.register(currentUser, createUserDto);
