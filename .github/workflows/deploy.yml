@@ -1,6 +1,10 @@
 name: Deploy
 
-on: [push]
+on: 
+  push: 
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   build:
@@ -8,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: Er0r/clipinvoice_backend@main
 
     - name: Copy repository contents via scp
-      uses: Er0r/clipinvoice_backend@v0.0.1
+      uses: Er0r/clipinvoice_backend@main
       env:
         HOST: 188.166.242.144
         USERNAME: root
@@ -70,7 +74,7 @@ jobs:
         target: "/var/www/clipinvoice_backend"
 
     - name: Executing remote command
-      uses: Er0r/clipinvoice_backend@v0.0.1
+      uses: Er0r/clipinvoice_backend@main
       with:
         host: 188.166.242.144
         USERNAME: root
