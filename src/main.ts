@@ -5,12 +5,15 @@ import * as cors from 'cors';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use(cors());
+  
   app.enableCors({
     origin: '*',
     methods: 'GET, PUT, POST, DELETE',
-    allowedHeaders: 'Content-Type, Authorization',
+    credentials: true,
+    allowedHeaders: 'origin, x-requested-with, accept, content-type, authorization',
   });
+
+  app.use(cors());
   const port = process.env.APP_PORT || 3000;
   app.setGlobalPrefix('api/v1');
   const config = new DocumentBuilder()
