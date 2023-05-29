@@ -4,12 +4,14 @@ import {
   Column,
   CreateDateColumn,
   OneToMany,
+  ManyToOne,
 } from 'typeorm';
 
 import { hash } from 'bcrypt';
 import { BeforeInsert } from 'typeorm';
 import { ProductEntity } from 'src/products/products.entity';
 import { InvoiceEntity } from 'src/invoice/invoice.entity';
+import { CompanyEntity } from 'src/company/company.entity';
 
 @Entity('user')
 export class User {
@@ -31,9 +33,6 @@ export class User {
   @Column()
   status: string;
 
-  @Column()
-  company: string;
-
   @CreateDateColumn()
   created_at: Date;
 
@@ -50,4 +49,8 @@ export class User {
 
   @OneToMany(() => InvoiceEntity, (invoice) => invoice.user)
   invoices: InvoiceEntity[];
+
+  @ManyToOne(() => CompanyEntity, (company) => company.users)
+  company: CompanyEntity;
+
 }
