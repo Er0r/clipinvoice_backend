@@ -10,7 +10,7 @@ export class CompanyEntity {
     name: string;
 
     @Column()
-    logo: string;
+    logo?: string;
 
     @Column()
     phone_number: string;
