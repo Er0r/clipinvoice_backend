@@ -1,5 +1,4 @@
 # compiled output
-/dist
 /node_modules
 /pgdata
 
@@ -38,3 +37,4 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 src/ormconfig.ts
+node_modules
