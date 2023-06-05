@@ -7,8 +7,9 @@ import { User } from 'src/users/user.entity';
 import { InvoiceEntity } from './invoice.entity';
 import { Roles } from 'src/users/roles/roles.decorator';
 import { RolesType } from 'src/users/role/role.enum';
+import { ApiTags } from '@nestjs/swagger';
 
-
+@ApiTags('invoice')
 @Controller('invoice')
 export class InvoiceController {
     constructor (readonly invoiceService: InvoiceService) {}

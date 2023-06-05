@@ -48,12 +48,39 @@ export class UsersService {
   }
 
   async findById(id: number): Promise<User> {
-    return this.usersRepository.findOne(id);
+    const user = await this.usersRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.company', 'companies')
+      .where('user.id = :id', { id: id })
+      .select(['user.id', 'user.name', 'user.email', 'user.password', 'user.role', 'companies.id', 'companies.name'])
+      .getOne();
+    return user;
+  }
+
+  async getAllUsers(currentUser, type): Promise<User[]> { 
+    try {
+     // fetch all users of the same company
+      const users = await this.usersRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.company', 'companies')
+      .where('companies.id = :id', { id: currentUser.company.id })
+      .andWhere('user.role = :role', { role: type })
+      .select(['user.id', 'user.name', 'user.email', 'user.password', 'user.role', 'companies.id', 'companies.name'])
+      .getMany();
+      return users;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async login(loginUserDto: LoginUserDto): Promise<User> {
     try {
-      const user = await this.usersRepository.findOne({ email: loginUserDto.email }, { select: ['id', 'name', 'email', 'password'] });
+      const user = await this.usersRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.company', 'companies')
+      .where('user.email = :email', { email: loginUserDto.email })
+      .select(['user.id', 'user.name', 'user.email', 'user.password', 'companies.id', 'user.role', 'companies.name'])
+      .getOne();
       if (!user) {
         throw new HttpException('User with this email does not exist', HttpStatus.UNPROCESSABLE_ENTITY);
       }

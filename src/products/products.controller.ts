@@ -8,8 +8,9 @@ import { ProductEntity } from './products.entity';
 import { Roles } from 'src/users/roles/roles.decorator';
 import { RoleGuard } from 'src/users/role/role.guard';
 import { RolesType } from 'src/users/role/role.enum';
+import { ApiTags } from '@nestjs/swagger';
 
-
+@ApiTags('products')
 @Controller('products')
 export class ProductsController {
     constructor(readonly productsService: ProductsService) {} 

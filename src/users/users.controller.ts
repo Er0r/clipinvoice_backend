@@ -1,4 +1,4 @@
-import { Controller, Body, Get, Post, Put, ValidationPipe, UsePipes, UseGuards } from '@nestjs/common';
+import { Controller, Body, Get, Post, Put, ValidationPipe, UsePipes, UseGuards, Param } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './DTO/create-user.dto';
 import { LoginUserDto } from './DTO/login-user.dto';
@@ -10,40 +10,51 @@ import { UpdateUserDto } from './DTO/update-user.dto';
 import { Roles } from 'src/users/roles/roles.decorator';
 import { RoleGuard } from 'src/users/role/role.guard';
 import { RolesType } from 'src/users/role/role.enum';
+import { ApiTags }  from '@nestjs/swagger';
 
-@Controller()
+@ApiTags('users')
+@Controller('users')
 export class UsersController {
     constructor( private usersService: UsersService) { }
 
-    @Post('users/admin/register') 
+    @Post('admin/register') 
     async registerAdmin(@Body() createUserDto: CreateUserDto): Promise<UserResponseInterface> { 
         const user = await this.usersService.registerAdmin(createUserDto);
         return await this.usersService.buildUserResponse(user);
     }
 
-    @Post('users/register') 
+    @Post('register') 
     @Roles(RolesType.SUPER_ADMIN, RolesType.ADMIN)
     @UseGuards(AuthGuard, RoleGuard)
     @UsePipes(new ValidationPipe())
     async register(@Body() createUserDto: CreateUserDto): Promise<UserResponseInterface> { 
-        const user = await this.usersService.register(createUserDto);
-        return await this.usersService.buildUserResponse(user);
+        const userData = await this.usersService.register(createUserDto);
+        return await this.usersService.buildUserResponse(userData);
     }
 
-    @Post('users/login')
+    @Post('login')
     @UsePipes(new ValidationPipe())
     async login(@Body() loginUserDto: LoginUserDto): Promise<UserResponseInterface> { 
         const user = await this.usersService.login(loginUserDto);
         return await this.usersService.buildUserResponse(user);    
     }
 
-    @Get('user')
-    @UseGuards(AuthGuard)
+    @Get()
+    @Roles(RolesType.SUPER_ADMIN, RolesType.ADMIN)
+    @UseGuards(AuthGuard, RoleGuard)
     async currentUser(@UserDecorator() user: User): Promise<UserResponseInterface> {
         return this.usersService.buildUserResponse(user);
     }
 
-    @Put('user') 
+    @Get(':type') 
+    @Roles(RolesType.SUPER_ADMIN, RolesType.ADMIN)
+    @UseGuards(AuthGuard, RoleGuard)
+    async getAllUsers( @Param('type') type: string, @UserDecorator() currentUser: User): Promise<UserResponseInterface[]> { 
+        const users = await this.usersService.getAllUsers(currentUser, type);
+        return users.map(user => this.usersService.buildUserResponse(user));
+    }
+
+    @Put()
     @UseGuards(AuthGuard)
     async updateCurrentUser( @UserDecorator() user: User, @Body() updateUserDto: UpdateUserDto): Promise<UserResponseInterface> { 
         const updatedUser = await this.usersService.updateCurrentUser(user, updateUserDto);
