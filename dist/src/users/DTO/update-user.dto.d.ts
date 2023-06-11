@@ -3,4 +3,5 @@ export declare class UpdateUserDto {
     email?: string;
     password?: string;
     status?: string;
+    company?: string;
 }

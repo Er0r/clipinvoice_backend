@@ -15,7 +15,7 @@ export class CompanyController {
   constructor(readonly companyService: CompanyService) {}
 
   @Post()
-  @Roles(RolesType.SUPER_ADMIN)
+  @Roles(RolesType.SUPER_ADMIN, RolesType.USER)
   @UseGuards(AuthGuard, RoleGuard)
   async create(
     @Body('company') createCompanyDto: CreateCompanyDto,

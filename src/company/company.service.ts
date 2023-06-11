@@ -41,4 +41,12 @@ export class CompanyService {
       },
     });
   }
+
+  async findByName(name: string): Promise<CompanyEntity> {
+    return await this.companyRepository.findOne({
+      where: {
+        name: name,
+      },
+    });
+  }
 }

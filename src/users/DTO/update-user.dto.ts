@@ -16,4 +16,10 @@ export class UpdateUserDto {
     @IsString()
     @IsOptional()
     status?: string;
+
+    // add json type for company
+    @IsString()
+    @IsOptional()
+    company?: string;
+
 }

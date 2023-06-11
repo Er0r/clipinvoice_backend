@@ -9,4 +9,5 @@ export declare class CompanyService {
     updateCompany(id: number, updateCompanyDto: UpdateCompanyDto): Promise<CompanyEntity>;
     getAll(): Promise<CompanyEntity[]>;
     findById(id: number): Promise<CompanyEntity>;
+    findByName(name: string): Promise<CompanyEntity>;
 }

@@ -40,7 +40,7 @@ let CompanyController = class CompanyController {
 };
 __decorate([
     (0, common_1.Post)(),
-    (0, roles_decorator_1.Roles)(role_enum_1.RolesType.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.RolesType.SUPER_ADMIN, role_enum_1.RolesType.USER),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard, role_guard_1.RoleGuard),
     __param(0, (0, common_1.Body)('company')),
     __metadata("design:type", Function),

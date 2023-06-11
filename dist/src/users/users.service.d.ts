@@ -4,9 +4,11 @@ import { User } from './user.entity';
 import { UserResponseInterface } from './types/userResponse.interface';
 import { LoginUserDto } from './DTO/login-user.dto';
 import { UpdateUserDto } from './DTO/update-user.dto';
+import { CompanyEntity } from 'src/company/company.entity';
 export declare class UsersService {
     private readonly usersRepository;
-    constructor(usersRepository: Repository<User>);
+    private readonly companyRepository;
+    constructor(usersRepository: Repository<User>, companyRepository: Repository<CompanyEntity>);
     registerAdmin(createUserDto: CreateUserDto): Promise<User>;
     register(createUserDto: CreateUserDto): Promise<User>;
     findById(id: number): Promise<User>;

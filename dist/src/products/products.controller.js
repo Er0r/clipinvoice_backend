@@ -38,7 +38,7 @@ let ProductsController = class ProductsController {
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
-    (0, roles_decorator_1.Roles)(role_enum_1.RolesType.ADMIN, role_enum_1.RolesType.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.RolesType.USER, role_enum_1.RolesType.SUPER_ADMIN),
     __param(0, (0, user_decorator_1.UserDecorator)()),
     __param(1, (0, common_1.Body)('product')),
     __metadata("design:type", Function),
@@ -47,7 +47,7 @@ __decorate([
 ], ProductsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
-    (0, roles_decorator_1.Roles)(role_enum_1.RolesType.CLIENT, role_enum_1.RolesType.ADMIN, role_enum_1.RolesType.SUPER_ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.RolesType.USER, role_enum_1.RolesType.SUPER_ADMIN),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard, role_guard_1.RoleGuard),
     __param(0, (0, user_decorator_1.UserDecorator)()),
     __metadata("design:type", Function),

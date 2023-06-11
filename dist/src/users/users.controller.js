@@ -62,8 +62,6 @@ __decorate([
 ], UsersController.prototype, "registerAdmin", null);
 __decorate([
     (0, common_1.Post)('register'),
-    (0, roles_decorator_1.Roles)(role_enum_1.RolesType.SUPER_ADMIN, role_enum_1.RolesType.ADMIN),
-    (0, common_1.UseGuards)(auth_guard_1.AuthGuard, role_guard_1.RoleGuard),
     (0, common_1.UsePipes)(new common_1.ValidationPipe()),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -80,7 +78,7 @@ __decorate([
 ], UsersController.prototype, "login", null);
 __decorate([
     (0, common_1.Get)(),
-    (0, roles_decorator_1.Roles)(role_enum_1.RolesType.SUPER_ADMIN, role_enum_1.RolesType.ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.RolesType.SUPER_ADMIN, role_enum_1.RolesType.USER),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard, role_guard_1.RoleGuard),
     __param(0, (0, user_decorator_1.UserDecorator)()),
     __metadata("design:type", Function),
@@ -89,7 +87,7 @@ __decorate([
 ], UsersController.prototype, "currentUser", null);
 __decorate([
     (0, common_1.Get)(':type'),
-    (0, roles_decorator_1.Roles)(role_enum_1.RolesType.SUPER_ADMIN, role_enum_1.RolesType.ADMIN),
+    (0, roles_decorator_1.Roles)(role_enum_1.RolesType.SUPER_ADMIN, role_enum_1.RolesType.USER),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard, role_guard_1.RoleGuard),
     __param(0, (0, common_1.Param)('type')),
     __param(1, (0, user_decorator_1.UserDecorator)()),
@@ -98,8 +96,9 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getAllUsers", null);
 __decorate([
-    (0, common_1.Put)(),
-    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
+    (0, common_1.Put)(':id'),
+    (0, roles_decorator_1.Roles)(role_enum_1.RolesType.SUPER_ADMIN, role_enum_1.RolesType.USER),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard, role_guard_1.RoleGuard),
     __param(0, (0, user_decorator_1.UserDecorator)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),

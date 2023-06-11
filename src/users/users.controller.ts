@@ -24,8 +24,6 @@ export class UsersController {
     }
 
     @Post('register') 
-    @Roles(RolesType.SUPER_ADMIN, RolesType.ADMIN)
-    @UseGuards(AuthGuard, RoleGuard)
     @UsePipes(new ValidationPipe())
     async register(@Body() createUserDto: CreateUserDto): Promise<UserResponseInterface> { 
         const userData = await this.usersService.register(createUserDto);
@@ -40,24 +38,26 @@ export class UsersController {
     }
 
     @Get()
-    @Roles(RolesType.SUPER_ADMIN, RolesType.ADMIN)
+    @Roles(RolesType.SUPER_ADMIN, RolesType.USER)
     @UseGuards(AuthGuard, RoleGuard)
     async currentUser(@UserDecorator() user: User): Promise<UserResponseInterface> {
         return this.usersService.buildUserResponse(user);
     }
 
     @Get(':type') 
-    @Roles(RolesType.SUPER_ADMIN, RolesType.ADMIN)
+    @Roles(RolesType.SUPER_ADMIN, RolesType.USER)
     @UseGuards(AuthGuard, RoleGuard)
     async getAllUsers( @Param('type') type: string, @UserDecorator() currentUser: User): Promise<UserResponseInterface[]> { 
         const users = await this.usersService.getAllUsers(currentUser, type);
         return users.map(user => this.usersService.buildUserResponse(user));
     }
 
-    @Put()
-    @UseGuards(AuthGuard)
+    @Put(':id')
+    @Roles(RolesType.SUPER_ADMIN, RolesType.USER)
+    @UseGuards(AuthGuard, RoleGuard)
     async updateCurrentUser( @UserDecorator() user: User, @Body() updateUserDto: UpdateUserDto): Promise<UserResponseInterface> { 
         const updatedUser = await this.usersService.updateCurrentUser(user, updateUserDto);
         return this.usersService.buildUserResponse(updatedUser);
+
     }
 }

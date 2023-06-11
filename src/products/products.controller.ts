@@ -17,14 +17,14 @@ export class ProductsController {
     
     @Post()
     @UseGuards(AuthGuard)
-    @Roles(RolesType.ADMIN, RolesType.SUPER_ADMIN)
+    @Roles(RolesType.USER, RolesType.SUPER_ADMIN)
     async create(@UserDecorator() currentUser: User,  @Body('product') createProductDto: CreateProductDto): Promise<ProductEntity> {
         console.log( createProductDto );
         return await this.productsService.createProduct(currentUser, createProductDto);
     }
 
     @Get()
-    @Roles(RolesType.CLIENT, RolesType.ADMIN, RolesType.SUPER_ADMIN)
+    @Roles(RolesType.USER, RolesType.SUPER_ADMIN)
     @UseGuards(AuthGuard, RoleGuard)
     async getAll(@UserDecorator() currentUser: User): Promise<ProductEntity[]> { 
         return await this.productsService.getAllProducts(currentUser);

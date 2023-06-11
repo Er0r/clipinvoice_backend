@@ -11,11 +11,13 @@ import { HttpStatus } from '@nestjs/common/enums';
 import { compare } from 'bcrypt';
 import { LoginUserDto } from './DTO/login-user.dto';
 import { UpdateUserDto } from './DTO/update-user.dto';
+import { CompanyEntity } from 'src/company/company.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private readonly usersRepository: Repository<User>,
+    @InjectRepository(CompanyEntity)  private readonly companyRepository: Repository<CompanyEntity>, 
   ) { }
 
   async registerAdmin (createUserDto: CreateUserDto): Promise<User> { 
@@ -28,6 +30,7 @@ export class UsersService {
       Object.assign(newUser, createUserDto);
       newUser.role = 'super_admin';
       return await this.usersRepository.save(newUser);
+
     } catch (error) {
       throw error;
     }
@@ -41,7 +44,8 @@ export class UsersService {
       }
       const newUser = new User();
       Object.assign(newUser, createUserDto);
-      return await this.usersRepository.save(newUser);
+      let user = await this.usersRepository.save(newUser);
+      return user;
     } catch (error) {
       throw error;
     }
@@ -98,10 +102,21 @@ export class UsersService {
     }
   }
 
-  async updateCurrentUser(user: User, updateUserDto: UpdateUserDto): Promise<User> { 
+  async updateCurrentUser(user: User, updateUserDto: UpdateUserDto): Promise<User> {
     try {
+      if (updateUserDto.company) {
+        // find company by name
+        const company = await this.companyRepository.findOne({ name: updateUserDto.company });
+        if (!company) {
+          throw new HttpException('Company with this name does not exist', HttpStatus.UNPROCESSABLE_ENTITY);
+        } else {
+          updateUserDto.company = (company.id).toString();
+        }
+      }
+  
       Object.assign(user, updateUserDto);
-      return await this.usersRepository.save(user);
+      const updatedUser = await this.usersRepository.save(user);
+      return this.findById(updatedUser.id);
     } catch (error) {
       throw error;
     }

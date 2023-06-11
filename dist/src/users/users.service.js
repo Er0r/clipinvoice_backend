@@ -22,9 +22,11 @@ const config_1 = require("../config");
 const exceptions_1 = require("@nestjs/common/exceptions");
 const enums_1 = require("@nestjs/common/enums");
 const bcrypt_1 = require("bcrypt");
+const company_entity_1 = require("../company/company.entity");
 let UsersService = class UsersService {
-    constructor(usersRepository) {
+    constructor(usersRepository, companyRepository) {
         this.usersRepository = usersRepository;
+        this.companyRepository = companyRepository;
         this.buildUserResponse = (user) => {
             return {
                 user: Object.assign(Object.assign({}, user), { token: this.generateJWT(user) })
@@ -54,7 +56,8 @@ let UsersService = class UsersService {
             }
             const newUser = new user_entity_1.User();
             Object.assign(newUser, createUserDto);
-            return await this.usersRepository.save(newUser);
+            let user = await this.usersRepository.save(newUser);
+            return user;
         }
         catch (error) {
             throw error;
@@ -108,8 +111,18 @@ let UsersService = class UsersService {
     }
     async updateCurrentUser(user, updateUserDto) {
         try {
+            if (updateUserDto.company) {
+                const company = await this.companyRepository.findOne({ name: updateUserDto.company });
+                if (!company) {
+                    throw new exceptions_1.HttpException('Company with this name does not exist', enums_1.HttpStatus.UNPROCESSABLE_ENTITY);
+                }
+                else {
+                    updateUserDto.company = (company.id).toString();
+                }
+            }
             Object.assign(user, updateUserDto);
-            return await this.usersRepository.save(user);
+            const updatedUser = await this.usersRepository.save(user);
+            return this.findById(updatedUser.id);
         }
         catch (error) {
             throw error;
@@ -126,7 +139,9 @@ let UsersService = class UsersService {
 UsersService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, typeorm_1.InjectRepository)(company_entity_1.CompanyEntity)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository])
 ], UsersService);
 exports.UsersService = UsersService;
 //# sourceMappingURL=users.service.js.map

@@ -44,6 +44,13 @@ let CompanyService = class CompanyService {
             },
         });
     }
+    async findByName(name) {
+        return await this.companyRepository.findOne({
+            where: {
+                name: name,
+            },
+        });
+    }
 };
 CompanyService = __decorate([
     (0, common_1.Injectable)(),
