@@ -58,6 +58,5 @@ export class UsersController {
     async updateCurrentUser( @UserDecorator() user: User, @Body() updateUserDto: UpdateUserDto): Promise<UserResponseInterface> { 
         const updatedUser = await this.usersService.updateCurrentUser(user, updateUserDto);
         return this.usersService.buildUserResponse(updatedUser);
-
     }
 }

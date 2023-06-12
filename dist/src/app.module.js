@@ -14,17 +14,18 @@ const auth_middleware_1 = require("./users/middlewares/auth.middleware");
 const invoice_module_1 = require("./invoice/invoice.module");
 const products_module_1 = require("./products/products.module");
 const company_module_1 = require("./company/company.module");
+const consumers_module_1 = require("./consumers/consumers.module");
 const ormconfig_1 = require("./ormconfig");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer
             .apply(auth_middleware_1.AuthMiddleware)
-            .forRoutes({ path: '/products', method: common_1.RequestMethod.ALL }, { path: '/invoice', method: common_1.RequestMethod.ALL }, { path: '/company', method: common_1.RequestMethod.ALL }, { path: '/company/:id', method: common_1.RequestMethod.ALL }, { path: '/users/:type', method: common_1.RequestMethod.GET }, { path: '/users/:id', method: common_1.RequestMethod.PUT });
+            .forRoutes({ path: '/products', method: common_1.RequestMethod.ALL }, { path: '/invoice', method: common_1.RequestMethod.ALL }, { path: '/company', method: common_1.RequestMethod.ALL }, { path: '/company/:id', method: common_1.RequestMethod.ALL }, { path: '/users/:type', method: common_1.RequestMethod.GET }, { path: '/users/:id', method: common_1.RequestMethod.PUT }, { path: '/consumers/register', method: common_1.RequestMethod.POST });
     }
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forRoot(ormconfig_1.default), users_module_1.UsersModule, invoice_module_1.InvoiceModule, products_module_1.ProductsModule, company_module_1.CompanyModule],
+        imports: [typeorm_1.TypeOrmModule.forRoot(ormconfig_1.default), users_module_1.UsersModule, invoice_module_1.InvoiceModule, products_module_1.ProductsModule, company_module_1.CompanyModule, consumers_module_1.ConsumersModule],
         controllers: [],
         providers: [],
     })
