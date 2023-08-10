@@ -52,5 +52,4 @@ export class User {
 
   @ManyToOne(() => CompanyEntity, (company) => company.users)
   company: CompanyEntity;
-
 }
