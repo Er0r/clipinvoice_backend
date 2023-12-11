@@ -11,19 +11,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateProductDto = void 0;
 const class_validator_1 = require("class-validator");
+const swagger_1 = require("@nestjs/swagger");
 class CreateProductDto {
 }
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'name', example: 'Egg' }),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateProductDto.prototype, "name", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'price', example: 10 }),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
 ], CreateProductDto.prototype, "price", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'quantity', example: 1 }),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
-], CreateProductDto.prototype, "quantity", void 0);
+], CreateProductDto.prototype, "stock_quantity", void 0);
 exports.CreateProductDto = CreateProductDto;
 //# sourceMappingURL=create-product.dto.js.map

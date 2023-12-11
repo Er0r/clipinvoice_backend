@@ -13,7 +13,7 @@ export class ProductEntity {
     price: number;
 
     @Column()
-    quantity: number;
+    stock_quantity: number;
 
     @CreateDateColumn()
     created_at: Date;

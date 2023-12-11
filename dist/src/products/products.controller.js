@@ -28,7 +28,6 @@ let ProductsController = class ProductsController {
         this.productsService = productsService;
     }
     async create(currentUser, createProductDto) {
-        console.log(createProductDto);
         return await this.productsService.createProduct(currentUser, createProductDto);
     }
     async getAll(currentUser) {

@@ -19,7 +19,6 @@ export class ProductsController {
     @UseGuards(AuthGuard)
     @Roles(RolesType.USER, RolesType.SUPER_ADMIN)
     async create(@UserDecorator() currentUser: User,  @Body('product') createProductDto: CreateProductDto): Promise<ProductEntity> {
-        console.log( createProductDto );
         return await this.productsService.createProduct(currentUser, createProductDto);
     }
 
