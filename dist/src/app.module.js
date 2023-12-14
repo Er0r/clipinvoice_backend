@@ -20,7 +20,7 @@ let AppModule = class AppModule {
     configure(consumer) {
         consumer
             .apply(auth_middleware_1.AuthMiddleware)
-            .forRoutes({ path: '/products', method: common_1.RequestMethod.ALL }, { path: '/invoice', method: common_1.RequestMethod.ALL }, { path: '/company', method: common_1.RequestMethod.ALL }, { path: '/company/:id', method: common_1.RequestMethod.ALL }, { path: '/users/:type', method: common_1.RequestMethod.GET }, { path: '/users/:id', method: common_1.RequestMethod.PUT }, { path: '/consumers/register', method: common_1.RequestMethod.POST });
+            .forRoutes({ path: '/products', method: common_1.RequestMethod.ALL }, { path: '/invoice', method: common_1.RequestMethod.ALL }, { path: '/company', method: common_1.RequestMethod.ALL }, { path: '/company/:id', method: common_1.RequestMethod.ALL }, { path: '/users/:type', method: common_1.RequestMethod.GET }, { path: '/users/:id', method: common_1.RequestMethod.PUT }, { path: '/consumers/create', method: common_1.RequestMethod.POST });
     }
 };
 AppModule = __decorate([

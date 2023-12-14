@@ -14,7 +14,7 @@ import { UserDecorator } from 'src/users/decorators/user.decorator';
 export class ConsumersController {
   constructor(private readonly consumersService: ConsumersService) {}
 
-  @Post('register')
+  @Post('create')
   @Roles(RolesType.SUPER_ADMIN, RolesType.USER)
   @UseGuards(AuthGuard, RoleGuard)
   @UsePipes(new ValidationPipe())

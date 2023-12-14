@@ -31,7 +31,7 @@ let ConsumersController = class ConsumersController {
     }
 };
 __decorate([
-    (0, common_1.Post)('register'),
+    (0, common_1.Post)('create'),
     (0, roles_decorator_1.Roles)(role_enum_1.RolesType.SUPER_ADMIN, role_enum_1.RolesType.USER),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard, role_guard_1.RoleGuard),
     (0, common_1.UsePipes)(new common_1.ValidationPipe()),

@@ -17,6 +17,13 @@ export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthMiddleware)
-      .forRoutes({ path: '/products', method: RequestMethod.ALL },{ path: '/invoice', method: RequestMethod.ALL },{ path: '/company', method: RequestMethod.ALL }, { path: '/company/:id', method: RequestMethod.ALL }, { path: '/users/:type', method: RequestMethod.GET }, { path: '/users/:id', method: RequestMethod.PUT }, { path: '/consumers/register', method: RequestMethod.POST });
+      .forRoutes({ path: '/products', method: RequestMethod.ALL },
+      { path: '/invoice', method: RequestMethod.ALL },
+      { path: '/company', method: RequestMethod.ALL }, 
+      { path: '/company/:id', method: RequestMethod.ALL }, 
+      { path: '/users/:type', method: RequestMethod.GET }, 
+      { path: '/users/:id', method: RequestMethod.PUT }, 
+      { path: '/consumers/create', method: RequestMethod.POST }
+      );
   }
 }
