@@ -2,4 +2,6 @@ export declare class CreateInvoiceDto {
     total: number;
     slug: string;
     readonly products: [];
+    userId: number;
+    consumerId: number;
 }

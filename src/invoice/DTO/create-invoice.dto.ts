@@ -9,4 +9,10 @@ export class CreateInvoiceDto {
 
     @IsNotEmpty()
     readonly products: [];
+
+    @IsNotEmpty()
+    userId: number;
+
+    @IsNotEmpty()
+    consumerId: number;
 }
