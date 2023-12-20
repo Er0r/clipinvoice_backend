@@ -23,7 +23,7 @@ export class AppModule {
       { path: '/company/:id', method: RequestMethod.ALL }, 
       { path: '/users/:type', method: RequestMethod.GET }, 
       { path: '/users/:id', method: RequestMethod.PUT }, 
-      { path: '/consumers/create', method: RequestMethod.POST }
+      { path: '/consumers', method: RequestMethod.ALL }
       );
   }
 }

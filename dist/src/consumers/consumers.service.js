@@ -36,6 +36,28 @@ let ConsumersService = class ConsumersService {
             throw error;
         }
     }
+    async fetch(user) {
+        try {
+            const query = this.consumerRepository.createQueryBuilder('consumer')
+                .where("consumer.created_by = :created_by", { created_by: user.id });
+            const stream = await query.stream();
+            let consumers = [];
+            stream.on('data', (consumer) => {
+                consumers.push(consumer);
+            });
+            return new Promise((resolve, reject) => {
+                stream.on('end', () => {
+                    resolve(consumers);
+                });
+                stream.on('error', (err) => {
+                    reject(err);
+                });
+            });
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 };
 ConsumersService = __decorate([
     (0, common_1.Injectable)(),

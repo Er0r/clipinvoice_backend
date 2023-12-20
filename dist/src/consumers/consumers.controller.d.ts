@@ -6,4 +6,5 @@ export declare class ConsumersController {
     private readonly consumersService;
     constructor(consumersService: ConsumersService);
     register(user: User, createConsumerDto: CreateConsumerDto): Promise<ConsumerEntity>;
+    fetchUser(user: User): Promise<ConsumerEntity[]>;
 }

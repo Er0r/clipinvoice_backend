@@ -29,18 +29,37 @@ let ConsumersController = class ConsumersController {
     async register(user, createConsumerDto) {
         return await this.consumersService.register(user, createConsumerDto);
     }
+    async fetchUser(user) {
+        try {
+            return await this.consumersService.fetch(user);
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 };
 __decorate([
-    (0, common_1.Post)('create'),
+    (0, common_1.Post)(),
     (0, roles_decorator_1.Roles)(role_enum_1.RolesType.SUPER_ADMIN, role_enum_1.RolesType.USER),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard, role_guard_1.RoleGuard),
     (0, common_1.UsePipes)(new common_1.ValidationPipe()),
     __param(0, (0, user_decorator_1.UserDecorator)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [user_entity_1.User, create_consumer_dto_1.CreateConsumerDto]),
+    __metadata("design:paramtypes", [user_entity_1.User,
+        create_consumer_dto_1.CreateConsumerDto]),
     __metadata("design:returntype", Promise)
 ], ConsumersController.prototype, "register", null);
+__decorate([
+    (0, common_1.Get)(),
+    (0, roles_decorator_1.Roles)(role_enum_1.RolesType.SUPER_ADMIN, role_enum_1.RolesType.USER),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard, role_guard_1.RoleGuard),
+    (0, common_1.UsePipes)(new common_1.ValidationPipe()),
+    __param(0, (0, user_decorator_1.UserDecorator)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [user_entity_1.User]),
+    __metadata("design:returntype", Promise)
+], ConsumersController.prototype, "fetchUser", null);
 ConsumersController = __decorate([
     (0, common_1.Controller)('consumers'),
     __metadata("design:paramtypes", [consumers_service_1.ConsumersService])
