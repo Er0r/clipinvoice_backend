@@ -1,4 +1,4 @@
-export declare class CreateConsumerDto {
+export declare class CreateCustomerDto {
     name: string;
     phone_number: string;
     address: string;

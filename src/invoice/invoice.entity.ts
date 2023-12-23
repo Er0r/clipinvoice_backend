@@ -1,6 +1,6 @@
 import {PrimaryGeneratedColumn, Entity, Column, ManyToOne, OneToMany, CreateDateColumn, BeforeUpdate} from 'typeorm';
 import { User } from 'src/users/user.entity';
-import { ConsumerEntity } from 'src/consumers/consumers.entity';
+import { CustomerEntity } from 'src/customers/customers.entity';
 
 @Entity('invoices')
 export class InvoiceEntity { 
@@ -33,6 +33,6 @@ export class InvoiceEntity {
     @ManyToOne(() => User, user => user.invoices)
     user: User;
 
-    @ManyToOne(() => ConsumerEntity, consumer => consumer.invoices)
-    consumer: ConsumerEntity;
+    @ManyToOne(() => CustomerEntity, consumer => consumer.invoices)
+    consumer: CustomerEntity;
 }

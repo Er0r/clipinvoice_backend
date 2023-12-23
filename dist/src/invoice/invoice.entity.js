@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.InvoiceEntity = void 0;
 const typeorm_1 = require("typeorm");
 const user_entity_1 = require("../users/user.entity");
-const consumers_entity_1 = require("../consumers/consumers.entity");
+const customers_entity_1 = require("../customers/customers.entity");
 let InvoiceEntity = class InvoiceEntity {
     updateTimestamp() {
         this.updated_at = new Date();
@@ -56,8 +56,8 @@ __decorate([
     __metadata("design:type", user_entity_1.User)
 ], InvoiceEntity.prototype, "user", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => consumers_entity_1.ConsumerEntity, consumer => consumer.invoices),
-    __metadata("design:type", consumers_entity_1.ConsumerEntity)
+    (0, typeorm_1.ManyToOne)(() => customers_entity_1.CustomerEntity, consumer => consumer.invoices),
+    __metadata("design:type", customers_entity_1.CustomerEntity)
 ], InvoiceEntity.prototype, "consumer", void 0);
 InvoiceEntity = __decorate([
     (0, typeorm_1.Entity)('invoices')

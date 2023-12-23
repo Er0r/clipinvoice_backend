@@ -1,6 +1,6 @@
 import { InvoiceEntity } from 'src/invoice/invoice.entity';
 import { CompanyEntity } from 'src/company/company.entity';
-export declare class ConsumerEntity {
+export declare class CustomerEntity {
     id: number;
     name: string;
     phone_number: string;

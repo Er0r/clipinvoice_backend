@@ -9,42 +9,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConsumerEntity = void 0;
+exports.CustomerEntity = void 0;
 const typeorm_1 = require("typeorm");
 const invoice_entity_1 = require("../invoice/invoice.entity");
 const company_entity_1 = require("../company/company.entity");
-let ConsumerEntity = class ConsumerEntity {
+let CustomerEntity = class CustomerEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], ConsumerEntity.prototype, "id", void 0);
+], CustomerEntity.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], ConsumerEntity.prototype, "name", void 0);
+], CustomerEntity.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], ConsumerEntity.prototype, "phone_number", void 0);
+], CustomerEntity.prototype, "phone_number", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], ConsumerEntity.prototype, "address", void 0);
+], CustomerEntity.prototype, "address", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], ConsumerEntity.prototype, "created_by", void 0);
+], CustomerEntity.prototype, "created_by", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => company_entity_1.CompanyEntity, (company) => company.consumers),
+    (0, typeorm_1.ManyToOne)(() => company_entity_1.CompanyEntity, (company) => company.customers),
     __metadata("design:type", company_entity_1.CompanyEntity)
-], ConsumerEntity.prototype, "company", void 0);
+], CustomerEntity.prototype, "company", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => invoice_entity_1.InvoiceEntity, (invoice) => invoice.user),
     __metadata("design:type", Array)
-], ConsumerEntity.prototype, "invoices", void 0);
-ConsumerEntity = __decorate([
+], CustomerEntity.prototype, "invoices", void 0);
+CustomerEntity = __decorate([
     (0, typeorm_1.Entity)('consumer')
-], ConsumerEntity);
-exports.ConsumerEntity = ConsumerEntity;
-//# sourceMappingURL=consumers.entity.js.map
+], CustomerEntity);
+exports.CustomerEntity = CustomerEntity;
+//# sourceMappingURL=customers.entity.js.map

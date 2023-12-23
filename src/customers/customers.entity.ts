@@ -4,7 +4,7 @@ import { InvoiceEntity } from 'src/invoice/invoice.entity';
 import { CompanyEntity } from 'src/company/company.entity';
 
 @Entity('consumer')
-export class ConsumerEntity {
+export class CustomerEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -21,7 +21,7 @@ export class ConsumerEntity {
   created_by: number;
 
 
-  @ManyToOne(() => CompanyEntity, (company) => company.consumers)
+  @ManyToOne(() => CompanyEntity, (company) => company.customers)
   company: CompanyEntity;
 
   @OneToMany(() => InvoiceEntity, (invoice) => invoice.user)

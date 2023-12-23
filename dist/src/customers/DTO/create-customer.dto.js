@@ -9,25 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateConsumerDto = void 0;
+exports.CreateCustomerDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
-class CreateConsumerDto {
+class CreateCustomerDto {
 }
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'name', example: 'Test-Consumer' }),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateConsumerDto.prototype, "name", void 0);
+], CreateCustomerDto.prototype, "name", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'phone_number', example: '1234567890' }),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateConsumerDto.prototype, "phone_number", void 0);
+], CreateCustomerDto.prototype, "phone_number", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'address', example: 'Test-Address' }),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateConsumerDto.prototype, "address", void 0);
-exports.CreateConsumerDto = CreateConsumerDto;
-//# sourceMappingURL=create-consumer.dto.js.map
+], CreateCustomerDto.prototype, "address", void 0);
+exports.CreateCustomerDto = CreateCustomerDto;
+//# sourceMappingURL=create-customer.dto.js.map

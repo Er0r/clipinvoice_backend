@@ -1,19 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ConsumerEntity } from './consumers.entity';
-import { CreateConsumerDto } from './DTO/create-consumer.dto';
+import { CustomerEntity } from './customers.entity';
+import { CreateCustomerDto } from './DTO/create-customer.dto';
 import { User } from 'src/users/user.entity';
 
 @Injectable()
-export class ConsumersService {
-    constructor( 
-        @InjectRepository(ConsumerEntity) private readonly consumerRepository: Repository<ConsumerEntity>
-    ){  }
+export class CustomersService {
+    constructor(
+        @InjectRepository(CustomerEntity) private readonly customerRepository: Repository<CustomerEntity>
+    ) { }
 
-    async register(user: User, createConsumerDto: CreateConsumerDto): Promise<ConsumerEntity> { 
+    async register(user: User, createConsumerDto: CreateCustomerDto): Promise<CustomerEntity> { 
         try { 
-            const consumer = new ConsumerEntity();
+            const consumer = new CustomerEntity();
             consumer.created_by = user.id;
             if(user.company != null) {
                 consumer.company = user.company;
@@ -21,28 +21,28 @@ export class ConsumersService {
             
             Object.assign(consumer, createConsumerDto);
         
-            let createConsumer = await this.consumerRepository.save(consumer);
+            let createConsumer = await this.customerRepository.save(consumer);
             return createConsumer;
 
         } catch (error) {
             throw error;
         }
     }
-    async fetch(user: User): Promise<ConsumerEntity[]> {
+    async fetch(user: User): Promise<CustomerEntity[]> {
         try {
-            const query = this.consumerRepository.createQueryBuilder('consumer')
+            const query = this.customerRepository.createQueryBuilder('consumer')
                 .where("consumer.created_by = :created_by", { created_by: user.id });
     
             const stream = await query.stream();
-            let consumers = [];
+            let customers = [];
     
             stream.on('data', (consumer) => {
-                consumers.push(consumer);
+                customers.push(consumer);
             });
     
             return new Promise((resolve, reject) => {
                 stream.on('end', () => {
-                    resolve(consumers);
+                    resolve(customers);
                 });
     
                 stream.on('error', (err) => {

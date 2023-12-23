@@ -1,5 +1,5 @@
 import { User } from 'src/users/user.entity';
-import { ConsumerEntity } from 'src/consumers/consumers.entity';
+import { CustomerEntity } from 'src/customers/customers.entity';
 export declare class CompanyEntity {
     id: number;
     name: string;
@@ -10,5 +10,5 @@ export declare class CompanyEntity {
     created_at: Date;
     updated_at: Date;
     users: User[];
-    consumers: ConsumerEntity[];
+    customers: CustomerEntity[];
 }

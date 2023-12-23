@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompanyEntity = void 0;
 const typeorm_1 = require("typeorm");
 const user_entity_1 = require("../users/user.entity");
-const consumers_entity_1 = require("../consumers/consumers.entity");
+const customers_entity_1 = require("../customers/customers.entity");
 let CompanyEntity = class CompanyEntity {
 };
 __decorate([
@@ -52,9 +52,9 @@ __decorate([
     __metadata("design:type", Array)
 ], CompanyEntity.prototype, "users", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => consumers_entity_1.ConsumerEntity, consumer => consumer.company),
+    (0, typeorm_1.OneToMany)(() => customers_entity_1.CustomerEntity, customer => customer.company),
     __metadata("design:type", Array)
-], CompanyEntity.prototype, "consumers", void 0);
+], CompanyEntity.prototype, "customers", void 0);
 CompanyEntity = __decorate([
     (0, typeorm_1.Entity)('companies')
 ], CompanyEntity);

@@ -12,24 +12,24 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConsumersService = void 0;
+exports.CustomersService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
-const consumers_entity_1 = require("./consumers.entity");
-let ConsumersService = class ConsumersService {
-    constructor(consumerRepository) {
-        this.consumerRepository = consumerRepository;
+const customers_entity_1 = require("./customers.entity");
+let CustomersService = class CustomersService {
+    constructor(customerRepository) {
+        this.customerRepository = customerRepository;
     }
     async register(user, createConsumerDto) {
         try {
-            const consumer = new consumers_entity_1.ConsumerEntity();
+            const consumer = new customers_entity_1.CustomerEntity();
             consumer.created_by = user.id;
             if (user.company != null) {
                 consumer.company = user.company;
             }
             Object.assign(consumer, createConsumerDto);
-            let createConsumer = await this.consumerRepository.save(consumer);
+            let createConsumer = await this.customerRepository.save(consumer);
             return createConsumer;
         }
         catch (error) {
@@ -38,16 +38,16 @@ let ConsumersService = class ConsumersService {
     }
     async fetch(user) {
         try {
-            const query = this.consumerRepository.createQueryBuilder('consumer')
+            const query = this.customerRepository.createQueryBuilder('consumer')
                 .where("consumer.created_by = :created_by", { created_by: user.id });
             const stream = await query.stream();
-            let consumers = [];
+            let customers = [];
             stream.on('data', (consumer) => {
-                consumers.push(consumer);
+                customers.push(consumer);
             });
             return new Promise((resolve, reject) => {
                 stream.on('end', () => {
-                    resolve(consumers);
+                    resolve(customers);
                 });
                 stream.on('error', (err) => {
                     reject(err);
@@ -59,10 +59,10 @@ let ConsumersService = class ConsumersService {
         }
     }
 };
-ConsumersService = __decorate([
+CustomersService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(consumers_entity_1.ConsumerEntity)),
+    __param(0, (0, typeorm_1.InjectRepository)(customers_entity_1.CustomerEntity)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
-], ConsumersService);
-exports.ConsumersService = ConsumersService;
-//# sourceMappingURL=consumers.service.js.map
+], CustomersService);
+exports.CustomersService = CustomersService;
+//# sourceMappingURL=customers.service.js.map

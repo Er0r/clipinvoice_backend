@@ -7,19 +7,20 @@ import {
     UseGuards,
     Get,
   } from '@nestjs/common';
-  import { ConsumersService } from './consumers.service';
-  import { CreateConsumerDto } from './DTO/create-consumer.dto';
-  import { ConsumerEntity } from './consumers.entity';
+  import { CustomersService } from './customers.service';
+  import { CreateCustomerDto } from './DTO/create-customer.dto';
+  import { CustomerEntity } from './customers.entity';
   import { Roles } from 'src/users/roles/roles.decorator';
   import { RolesType } from 'src/users/role/role.enum';
   import { AuthGuard } from 'src/users/guards/auth.guard';
   import { RoleGuard } from 'src/users/role/role.guard';
   import { User } from 'src/users/user.entity';
   import { UserDecorator } from 'src/users/decorators/user.decorator';
-  
-  @Controller('consumers')
-  export class ConsumersController {
-    constructor(private readonly consumersService: ConsumersService) {}
+
+
+@Controller('customers')
+export class CustomersController {
+    constructor(private readonly customersService: CustomersService) {}
   
     @Post()
     @Roles(RolesType.SUPER_ADMIN, RolesType.USER)
@@ -27,21 +28,20 @@ import {
     @UsePipes(new ValidationPipe())
     async register(
       @UserDecorator() user: User,
-      @Body() createConsumerDto: CreateConsumerDto,
-    ): Promise<ConsumerEntity> {
-      return await this.consumersService.register(user, createConsumerDto);
+      @Body('consumer') createCustomerDto: CreateCustomerDto,
+    ): Promise<CustomerEntity> {
+      return await this.customersService.register(user, createCustomerDto);
     }
   
     @Get()
     @Roles(RolesType.SUPER_ADMIN, RolesType.USER)
     @UseGuards(AuthGuard, RoleGuard)
     @UsePipes(new ValidationPipe())
-    async fetchUser(@UserDecorator() user: User): Promise<ConsumerEntity[]> {
+    async fetchUser(@UserDecorator() user: User): Promise<CustomerEntity[]> {
       try {
-        return await this.consumersService.fetch(user);
+        return await this.customersService.fetch(user);
       } catch (err) {
         throw err;
       }
     }
-  }
-  
+}

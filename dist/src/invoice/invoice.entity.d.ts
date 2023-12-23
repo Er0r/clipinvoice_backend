@@ -1,5 +1,5 @@
 import { User } from 'src/users/user.entity';
-import { ConsumerEntity } from 'src/consumers/consumers.entity';
+import { CustomerEntity } from 'src/customers/customers.entity';
 export declare class InvoiceEntity {
     id: number;
     total: number;
@@ -9,5 +9,5 @@ export declare class InvoiceEntity {
     updateTimestamp(): void;
     products: any[];
     user: User;
-    consumer: ConsumerEntity;
+    consumer: CustomerEntity;
 }

@@ -5,11 +5,12 @@ import { AuthMiddleware } from './users/middlewares/auth.middleware';
 import { InvoiceModule } from './invoice/invoice.module';
 import { ProductsModule } from './products/products.module';
 import { CompanyModule } from './company/company.module';
-import { ConsumersModule } from './consumers/consumers.module';
+
+import { CustomersModule } from './customers/customers.module';
 import ormConfig from './ormconfig';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(ormConfig), UsersModule, InvoiceModule, ProductsModule, CompanyModule, ConsumersModule],
+  imports: [TypeOrmModule.forRoot(ormConfig), UsersModule, InvoiceModule, ProductsModule, CompanyModule, CustomersModule],
   controllers: [],
   providers: [],
 })
@@ -23,7 +24,7 @@ export class AppModule {
       { path: '/company/:id', method: RequestMethod.ALL }, 
       { path: '/users/:type', method: RequestMethod.GET }, 
       { path: '/users/:id', method: RequestMethod.PUT }, 
-      { path: '/consumers', method: RequestMethod.ALL }
+      { path: '/customers', method: RequestMethod.ALL }
       );
   }
 }
