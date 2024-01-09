@@ -13,6 +13,9 @@ export class InvoiceEntity {
     @Column()
     slug: string;
 
+    @Column({nullable: true})
+    issued_at: Date;
+
     @CreateDateColumn()
     created_at: Date;
 

@@ -15,4 +15,7 @@ export class CreateInvoiceDto {
 
     @IsNotEmpty()
     consumerId: number;
+
+    @IsNotEmpty()
+    issued_at: Date;
 }

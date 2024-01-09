@@ -10,6 +10,10 @@ export class CreateProductDto {
     @IsNotEmpty()
     price: number;
 
+    @ApiProperty({ description: 'type', example: 'Item' })
+    @IsNotEmpty()
+    type: string;
+
     @ApiProperty({ description: 'quantity', example: 1 })
     @IsNotEmpty()
     stock_quantity: number;

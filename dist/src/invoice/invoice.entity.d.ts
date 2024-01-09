@@ -4,6 +4,7 @@ export declare class InvoiceEntity {
     id: number;
     total: number;
     slug: string;
+    issued_at: Date;
     created_at: Date;
     updated_at: Date;
     updateTimestamp(): void;

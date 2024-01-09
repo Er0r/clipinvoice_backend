@@ -12,6 +12,10 @@ export class ProductEntity {
     @Column()
     price: number;
 
+    // column can be nullable
+    @Column({ nullable: true })
+    type: string;
+
     @Column()
     stock_quantity: number;
 

@@ -30,6 +30,10 @@ __decorate([
     __metadata("design:type", Number)
 ], ProductEntity.prototype, "price", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], ProductEntity.prototype, "type", void 0);
+__decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], ProductEntity.prototype, "stock_quantity", void 0);

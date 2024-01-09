@@ -25,6 +25,11 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateProductDto.prototype, "price", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'type', example: 'Item' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CreateProductDto.prototype, "type", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ description: 'quantity', example: 1 }),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)

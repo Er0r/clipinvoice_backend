@@ -33,5 +33,9 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
 ], CreateInvoiceDto.prototype, "consumerId", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Date)
+], CreateInvoiceDto.prototype, "issued_at", void 0);
 exports.CreateInvoiceDto = CreateInvoiceDto;
 //# sourceMappingURL=create-invoice.dto.js.map

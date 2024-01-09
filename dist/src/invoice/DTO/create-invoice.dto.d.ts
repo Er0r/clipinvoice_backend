@@ -4,4 +4,5 @@ export declare class CreateInvoiceDto {
     readonly products: [];
     userId: number;
     consumerId: number;
+    issued_at: Date;
 }
