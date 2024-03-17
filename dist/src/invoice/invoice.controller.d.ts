@@ -7,4 +7,5 @@ export declare class InvoiceController {
     constructor(invoiceService: InvoiceService);
     create(currentUser: User, createInvoiceDto: CreateInvoiceDto): Promise<InvoiceEntity>;
     getAllInvoices(currentUser: User): Promise<InvoiceEntity[]>;
+    getInvoiceById(currentUser: User, id: number | string): Promise<InvoiceEntity>;
 }

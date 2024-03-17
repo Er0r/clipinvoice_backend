@@ -20,6 +20,7 @@ export class AppModule {
       .apply(AuthMiddleware)
       .forRoutes({ path: '/products', method: RequestMethod.ALL },
       { path: '/invoice', method: RequestMethod.ALL },
+      { path: '/invoice/:id', method: RequestMethod.ALL },
       { path: '/company', method: RequestMethod.ALL }, 
       { path: '/company/:id', method: RequestMethod.ALL }, 
       { path: '/users/:type', method: RequestMethod.GET }, 

@@ -40,6 +40,19 @@ let InvoiceService = class InvoiceService {
             console.log(err);
         }
     }
+    async getInvoiceById(currentUser, id) {
+        try {
+            if (isNaN(id)) {
+                return await this.invoiceRepository.findOne({ where: { slug: id, user: currentUser } });
+            }
+            else {
+                return await this.invoiceRepository.findOne({ where: { id, user: currentUser } });
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
 };
 InvoiceService = __decorate([
     (0, common_1.Injectable)(),

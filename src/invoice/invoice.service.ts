@@ -28,4 +28,16 @@ export class InvoiceService {
             console.log(err);
         }
     }
+
+    async getInvoiceById(currentUser: User, id: number | string): Promise<InvoiceEntity> { 
+        try{
+            if (isNaN(id as number)) {
+                return await this.invoiceRepository.findOne({ where: { slug: id, user: currentUser } });
+            } else {
+                return await this.invoiceRepository.findOne({ where: { id, user: currentUser } });
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }
