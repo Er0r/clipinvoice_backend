@@ -5,13 +5,18 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/users/user.entity';
 
-
 @Injectable()
 export class InvoiceService {
-    constructor(@InjectRepository(InvoiceEntity) private readonly invoiceRepository: Repository<InvoiceEntity>) {  } 
+    constructor(
+        @InjectRepository(InvoiceEntity)
+        private readonly invoiceRepository: Repository<InvoiceEntity>,
+    ) {}
 
-    async createInvoice(currentUser: User, createInvoiceDto: CreateInvoiceDto): Promise<InvoiceEntity> { 
-        try{
+    async createInvoice(
+        currentUser: User,
+        createInvoiceDto: CreateInvoiceDto,
+    ): Promise<InvoiceEntity> {
+        try {
             const invoice = new InvoiceEntity();
             Object.assign(invoice, createInvoiceDto);
             invoice.user = currentUser;
@@ -21,20 +26,32 @@ export class InvoiceService {
         }
     }
 
-    async getInvoices(currentUser: User): Promise<InvoiceEntity[]> { 
-        try{
-            return await this.invoiceRepository.find({ user: currentUser });
+    async getInvoices(currentUser: User): Promise<InvoiceEntity[]> {
+        try {
+            return await this.invoiceRepository.find({
+                where: { user: currentUser },
+                relations: ['consumer'],
+            });
         } catch (err) {
             console.log(err);
         }
     }
 
-    async getInvoiceById(currentUser: User, id: number | string): Promise<InvoiceEntity> { 
-        try{
+    async getInvoiceById(
+        currentUser: User,
+        id: number | string,
+    ): Promise<InvoiceEntity> {
+        try {
             if (isNaN(id as number)) {
-                return await this.invoiceRepository.findOne({ where: { slug: id, user: currentUser } });
+                return await this.invoiceRepository.findOne({
+                    where: { slug: id, user: currentUser },
+                    relations: ['consumer']
+                });
             } else {
-                return await this.invoiceRepository.findOne({ where: { id, user: currentUser } });
+                return await this.invoiceRepository.findOne({
+                    where: { id, user: currentUser },
+                    relations: ['consumer']
+                });
             }
         } catch (err) {
             console.log(err);

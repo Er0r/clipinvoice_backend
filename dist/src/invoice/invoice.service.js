@@ -34,7 +34,10 @@ let InvoiceService = class InvoiceService {
     }
     async getInvoices(currentUser) {
         try {
-            return await this.invoiceRepository.find({ user: currentUser });
+            return await this.invoiceRepository.find({
+                where: { user: currentUser },
+                relations: ['consumer'],
+            });
         }
         catch (err) {
             console.log(err);
@@ -43,10 +46,16 @@ let InvoiceService = class InvoiceService {
     async getInvoiceById(currentUser, id) {
         try {
             if (isNaN(id)) {
-                return await this.invoiceRepository.findOne({ where: { slug: id, user: currentUser } });
+                return await this.invoiceRepository.findOne({
+                    where: { slug: id, user: currentUser },
+                    relations: ['consumer']
+                });
             }
             else {
-                return await this.invoiceRepository.findOne({ where: { id, user: currentUser } });
+                return await this.invoiceRepository.findOne({
+                    where: { id, user: currentUser },
+                    relations: ['consumer']
+                });
             }
         }
         catch (err) {
