@@ -28,6 +28,15 @@ export class CustomersService {
             throw error;
         }
     }
+
+    async findOne(id: number): Promise<CustomerEntity> { 
+        try {
+            return await this.customerRepository.findOne({ where: { id } });
+        } catch (error) {
+            throw error;
+        }
+    }
+
     async fetch(user: User): Promise<CustomerEntity[]> {
         try {
             const query = this.customerRepository.createQueryBuilder('consumer')

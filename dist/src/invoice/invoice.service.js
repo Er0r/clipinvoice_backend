@@ -17,15 +17,18 @@ const common_1 = require("@nestjs/common");
 const invoice_entity_1 = require("./invoice.entity");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
+const customers_service_1 = require("../customers/customers.service");
 let InvoiceService = class InvoiceService {
-    constructor(invoiceRepository) {
+    constructor(invoiceRepository, customerRepository) {
         this.invoiceRepository = invoiceRepository;
+        this.customerRepository = customerRepository;
     }
     async createInvoice(currentUser, createInvoiceDto) {
         try {
             const invoice = new invoice_entity_1.InvoiceEntity();
             Object.assign(invoice, createInvoiceDto);
             invoice.user = currentUser;
+            invoice.consumer = await this.customerRepository.findOne(createInvoiceDto.consumerId);
             return await this.invoiceRepository.save(invoice);
         }
         catch (err) {
@@ -66,7 +69,9 @@ let InvoiceService = class InvoiceService {
 InvoiceService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(invoice_entity_1.InvoiceEntity)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, common_1.Inject)(customers_service_1.CustomersService)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        customers_service_1.CustomersService])
 ], InvoiceService);
 exports.InvoiceService = InvoiceService;
 //# sourceMappingURL=invoice.service.js.map

@@ -36,6 +36,14 @@ let CustomersService = class CustomersService {
             throw error;
         }
     }
+    async findOne(id) {
+        try {
+            return await this.customerRepository.findOne({ where: { id } });
+        }
+        catch (error) {
+            throw error;
+        }
+    }
     async fetch(user) {
         try {
             const query = this.customerRepository.createQueryBuilder('consumer')

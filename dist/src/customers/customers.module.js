@@ -20,6 +20,7 @@ CustomersModule = __decorate([
         imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.User, customers_entity_1.CustomerEntity])],
         controllers: [customers_controller_1.CustomersController],
         providers: [customers_service_1.CustomersService],
+        exports: [customers_service_1.CustomersService]
     })
 ], CustomersModule);
 exports.CustomersModule = CustomersModule;

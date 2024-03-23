@@ -6,5 +6,6 @@ export declare class CustomersService {
     private readonly customerRepository;
     constructor(customerRepository: Repository<CustomerEntity>);
     register(user: User, createConsumerDto: CreateCustomerDto): Promise<CustomerEntity>;
+    findOne(id: number): Promise<CustomerEntity>;
     fetch(user: User): Promise<CustomerEntity[]>;
 }
