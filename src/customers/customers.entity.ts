@@ -17,6 +17,21 @@ export class CustomerEntity {
   @Column()
   address: string;
 
+  @Column({ nullable: true })
+  lane1: string;
+
+  @Column({ nullable: true })
+  lane2: string;
+
+  @Column({ nullable: true })
+  upozila: string;
+  
+  @Column({ nullable: true })
+  district: string;
+  
+  @Column({ nullable: true })
+  division: string;
+
   @Column()
   created_by: number;
 

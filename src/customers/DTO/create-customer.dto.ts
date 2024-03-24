@@ -13,4 +13,10 @@ export class CreateCustomerDto {
     @ApiProperty({ description: 'address', example: 'Test-Address' })
     @IsNotEmpty()
     address: string;
+    lane1 ?: string;
+    lane2 ?: string;
+    upozila ?: string;
+    district ?: string;
+    division ?: string;
+
 }
