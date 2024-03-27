@@ -30,6 +30,11 @@ let ProductsService = class ProductsService {
     async getAllProducts(currentUser) {
         return await this.productRepository.find({ where: { user: currentUser } });
     }
+    async updateProduct(id, currentUser, createProductDto) {
+        const product = await this.productRepository.findOne({ where: { id, user: currentUser } });
+        Object.assign(product, createProductDto);
+        return await this.productRepository.save(product);
+    }
 };
 ProductsService = __decorate([
     (0, common_1.Injectable)(),

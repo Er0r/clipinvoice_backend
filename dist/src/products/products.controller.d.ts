@@ -7,4 +7,5 @@ export declare class ProductsController {
     constructor(productsService: ProductsService);
     create(currentUser: User, createProductDto: CreateProductDto): Promise<ProductEntity>;
     getAll(currentUser: User): Promise<ProductEntity[]>;
+    update(currentUser: User, id: number, createProductDto: CreateProductDto): Promise<ProductEntity>;
 }

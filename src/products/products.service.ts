@@ -18,4 +18,10 @@ export class ProductsService {
     async getAllProducts(currentUser: User): Promise<ProductEntity[]> { 
         return await this.productRepository.find({ where: { user: currentUser } });
     }
+
+    async updateProduct(id: number, currentUser: User, createProductDto: CreateProductDto): Promise<ProductEntity> {
+        const product = await this.productRepository.findOne({ where: { id, user: currentUser } });
+        Object.assign(product, createProductDto);
+        return await this.productRepository.save(product);
+    }
 }

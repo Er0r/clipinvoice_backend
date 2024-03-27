@@ -33,6 +33,9 @@ let ProductsController = class ProductsController {
     async getAll(currentUser) {
         return await this.productsService.getAllProducts(currentUser);
     }
+    async update(currentUser, id, createProductDto) {
+        return await this.productsService.updateProduct(id, currentUser, createProductDto);
+    }
 };
 __decorate([
     (0, common_1.Post)(),
@@ -53,6 +56,17 @@ __decorate([
     __metadata("design:paramtypes", [user_entity_1.User]),
     __metadata("design:returntype", Promise)
 ], ProductsController.prototype, "getAll", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    (0, roles_decorator_1.Roles)(role_enum_1.RolesType.USER, role_enum_1.RolesType.SUPER_ADMIN),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
+    __param(0, (0, user_decorator_1.UserDecorator)()),
+    __param(1, (0, common_1.Param)('id')),
+    __param(2, (0, common_1.Body)('product')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [user_entity_1.User, Number, create_product_dto_1.CreateProductDto]),
+    __metadata("design:returntype", Promise)
+], ProductsController.prototype, "update", null);
 ProductsController = __decorate([
     (0, swagger_1.ApiTags)('products'),
     (0, common_1.Controller)('products'),

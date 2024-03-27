@@ -25,6 +25,7 @@ export class AppModule {
       { path: '/company/:id', method: RequestMethod.ALL }, 
       { path: '/users/:type', method: RequestMethod.GET }, 
       { path: '/users/:id', method: RequestMethod.PUT }, 
+      { path: '/products/:id', method: RequestMethod.ALL },
       { path: '/customers', method: RequestMethod.ALL }
       );
   }
