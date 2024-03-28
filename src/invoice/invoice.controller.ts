@@ -1,4 +1,4 @@
-import { Controller, Body, Post, UseGuards, Get, Param } from '@nestjs/common';
+import { Controller, Body, Post, UseGuards, Get, Param, Delete } from '@nestjs/common';
 import { InvoiceService } from './invoice.service';
 import { AuthGuard } from '../users/guards/auth.guard';
 import { CreateInvoiceDto } from './DTO/create-invoice.dto';
@@ -33,5 +33,12 @@ export class InvoiceController {
     @Roles(RolesType.USER, RolesType.SUPER_ADMIN)
     async getInvoiceById(@UserDecorator() currentUser: User, @Param('id') id: number | string): Promise<InvoiceEntity> {
         return await this.invoiceService.getInvoiceById(currentUser, id);
+    }
+
+    @Delete()
+    @UseGuards(AuthGuard)
+    @Roles(RolesType.USER, RolesType.SUPER_ADMIN)
+    async deleteInvoice(@UserDecorator() currentUser: User, @Body('id') id: number[]): Promise<{ message: string }> {
+        return await this.invoiceService.deleteInvoices(currentUser, id);
     }
 }

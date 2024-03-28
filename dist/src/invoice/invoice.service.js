@@ -65,6 +65,17 @@ let InvoiceService = class InvoiceService {
             console.log(err);
         }
     }
+    async deleteInvoices(currentUser, id) {
+        try {
+            for (let i = 0; i < id.length; i++) {
+                await this.invoiceRepository.delete({ id: id[i], user: currentUser });
+            }
+            return { message: 'Invoices deleted successfully' };
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
 };
 InvoiceService = __decorate([
     (0, common_1.Injectable)(),

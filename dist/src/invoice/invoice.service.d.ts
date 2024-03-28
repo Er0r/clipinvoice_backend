@@ -10,4 +10,7 @@ export declare class InvoiceService {
     createInvoice(currentUser: User, createInvoiceDto: CreateInvoiceDto): Promise<InvoiceEntity>;
     getInvoices(currentUser: User): Promise<InvoiceEntity[]>;
     getInvoiceById(currentUser: User, id: number | string): Promise<InvoiceEntity>;
+    deleteInvoices(currentUser: User, id: number[]): Promise<{
+        message: string;
+    }>;
 }

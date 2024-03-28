@@ -35,6 +35,9 @@ let InvoiceController = class InvoiceController {
     async getInvoiceById(currentUser, id) {
         return await this.invoiceService.getInvoiceById(currentUser, id);
     }
+    async deleteInvoice(currentUser, id) {
+        return await this.invoiceService.deleteInvoices(currentUser, id);
+    }
 };
 __decorate([
     (0, common_1.Post)(),
@@ -65,6 +68,16 @@ __decorate([
     __metadata("design:paramtypes", [user_entity_1.User, Object]),
     __metadata("design:returntype", Promise)
 ], InvoiceController.prototype, "getInvoiceById", null);
+__decorate([
+    (0, common_1.Delete)(),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
+    (0, roles_decorator_1.Roles)(role_enum_1.RolesType.USER, role_enum_1.RolesType.SUPER_ADMIN),
+    __param(0, (0, user_decorator_1.UserDecorator)()),
+    __param(1, (0, common_1.Body)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [user_entity_1.User, Array]),
+    __metadata("design:returntype", Promise)
+], InvoiceController.prototype, "deleteInvoice", null);
 InvoiceController = __decorate([
     (0, swagger_1.ApiTags)('invoice'),
     (0, common_1.Controller)('invoice'),

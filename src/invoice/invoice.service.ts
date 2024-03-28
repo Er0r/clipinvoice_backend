@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { User } from '../users/user.entity';
 import { CustomersService } from '../customers/customers.service';
 
+
 @Injectable()
 export class InvoiceService {
     constructor(
@@ -58,6 +59,17 @@ export class InvoiceService {
                     relations: ['consumer']
                 });
             }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async deleteInvoices (currentUser: User, id: number[]) {
+        try {
+            for (let i = 0; i < id.length; i++) {
+                await this.invoiceRepository.delete({ id: id[i], user: currentUser});
+            }
+            return { message: 'Invoices deleted successfully' };
         } catch (err) {
             console.log(err);
         }
