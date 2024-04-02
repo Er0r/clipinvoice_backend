@@ -112,12 +112,12 @@ let UsersService = class UsersService {
     async updateCurrentUser(user, updateUserDto) {
         try {
             if (updateUserDto.company) {
-                const company = await this.companyRepository.findOne({ name: updateUserDto.company });
+                const company = await this.companyRepository.findOne({ id: updateUserDto.company.id });
                 if (!company) {
                     throw new exceptions_1.HttpException('Company with this name does not exist', enums_1.HttpStatus.UNPROCESSABLE_ENTITY);
                 }
                 else {
-                    updateUserDto.company = (company.id).toString();
+                    updateUserDto.company.id = (company.id);
                 }
             }
             Object.assign(user, updateUserDto);

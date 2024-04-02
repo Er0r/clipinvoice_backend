@@ -20,6 +20,8 @@ export class UpdateUserDto {
     // add json type for company
     @IsString()
     @IsOptional()
-    company?: string;
+    company?: {
+        id: number;
+    }
 
 }

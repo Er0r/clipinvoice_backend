@@ -106,11 +106,11 @@ export class UsersService {
     try {
       if (updateUserDto.company) {
         // find company by name
-        const company = await this.companyRepository.findOne({ name: updateUserDto.company });
+        const company = await this.companyRepository.findOne({ id: updateUserDto.company.id });
         if (!company) {
           throw new HttpException('Company with this name does not exist', HttpStatus.UNPROCESSABLE_ENTITY);
         } else {
-          updateUserDto.company = (company.id).toString();
+          updateUserDto.company.id = (company.id);
         }
       }
   

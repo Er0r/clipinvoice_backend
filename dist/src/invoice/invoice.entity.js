@@ -23,9 +23,37 @@ __decorate([
     __metadata("design:type", Number)
 ], InvoiceEntity.prototype, "id", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", Number)
+], InvoiceEntity.prototype, "total_product_price", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", Number)
+], InvoiceEntity.prototype, "vat", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", Number)
+], InvoiceEntity.prototype, "total_vat_price", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", Number)
+], InvoiceEntity.prototype, "delivery_fee", void 0);
+__decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], InvoiceEntity.prototype, "total", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", Number)
+], InvoiceEntity.prototype, "due", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], InvoiceEntity.prototype, "payment_status", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], InvoiceEntity.prototype, "note", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)

@@ -7,8 +7,29 @@ export class InvoiceEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Column({nullable: true})
+    total_product_price: number;
+
+    @Column({nullable: true})
+    vat: number;
+
+    @Column({nullable: true})
+    total_vat_price: number;
+
+    @Column({nullable: true})
+    delivery_fee: number;
+    
     @Column()
     total: number;
+
+    @Column({nullable: true})
+    due: number;
+
+    @Column({nullable: true})
+    payment_status: string;
+
+    @Column({nullable: true})
+    note: string;
 
     @Column()
     slug: string;
